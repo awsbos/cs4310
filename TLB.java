@@ -1,7 +1,7 @@
 
 public class TLB {
 
-	Entry[] TlbEntries = new Entry[16];
+	TLBEntry[] TlbEntries = new TLBEntry[16];
 	
 	
 	

@@ -13,7 +13,8 @@ public class Node
 	{
 		if(previous != null)
 		{
-			previous.setNext(getNext());
+			getPrevious().setNext(getNext());
+			getNext().setPrevious(getPrevious());
 			return this;
 		} else {
 			getNext().setPrevious(null);

@@ -1,35 +1,72 @@
 public class PageTableEntry
 {
-	private int PageFrame;
-	private boolean V;
-	private boolean R;
-	private boolean D;
-	public PageTableEntry()
+	private boolean valid;
+	private boolean reference;
+	private boolean dirty;
+	private int pageFrame;
+	private PageTableEntry(boolean valid, boolean reference, boolean dirty, int pageFrameNumber)
 	{
-		
+		setValid(valid);
+		setReference(reference);
+		setDirty(dirty);
+		setPageFrame(pageFrameNumber);
 	}
-	public int getPageFrame() {
-		return PageFrame;
+	// proper builder, that way PTE(B,B,B,I) stays private
+	public static PageTableEntry writeEntry(String hexFrameNumber)
+	{
+		return (new PageTableEntry(true, true, false, Integer.parseInt(hexFrameNumber.subSequence(0, 2).toString(), 16)));
 	}
-	public void setPageFrame(int pageFrame) {
-		PageFrame = pageFrame;
+	// proper alternate builder, that way PTE(B,B,B,I) stays private
+	public static PageTableEntry writeEntry(int intPageFrameNumber)
+	{
+		return (new PageTableEntry(true, true, false, intPageFrameNumber));
 	}
-	public boolean isValid() {
-		return V;
+	// main used functions below this point
+	public void resetAllBits()
+	{
+		setValid(true);
+		setReference(true);
+		setDirty(false);
 	}
-	public void setV(boolean v) {
-		V = v;
+	// below this point is default getter/setters + toString
+	public boolean isValid()
+	{
+		return valid;
 	}
-	public boolean isR() {
-		return R;
+	public void setValid(boolean valid)
+	{
+		this.valid = valid;
 	}
-	public void setR(boolean r) {
-		R = r;
+	public boolean isReference()
+	{
+		return reference;
 	}
-	public boolean isDirty() {
-		return D;
+	public void setReference(boolean reference)
+	{
+		this.reference = reference;
 	}
-	public void setD(boolean d) {
-		D = d;
+	public boolean isDirty()
+	{
+		return dirty;
+	}
+	public void setDirty(boolean dirty)
+	{
+		this.dirty = dirty;
+	}
+	public int getPageFrame()
+	{
+		if(isValid())
+		{
+			return -1;
+		}
+		return pageFrame;
+	}
+	public void setPageFrame(int pageFrame)
+	{
+		this.pageFrame = pageFrame;
+	}
+	public String toString()
+	{
+		return "Page Table Entry: (Valid: " + isValid() + ", Reference: " + isReference() + ", Dirty: " + isDirty() + ", Page Frame: " + getPageFrame();
 	}
 }

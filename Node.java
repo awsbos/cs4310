@@ -5,7 +5,20 @@ public class Node
 	private Node next;
 	public Node(Node previous, Node next, int current)
 	{
-		
+		setPrevious(previous);
+		setNext(next);
+		setCurrent(current);
+	}
+	public Node evict()
+	{
+		if(previous != null)
+		{
+			previous.setNext(getNext());
+			return this;
+		} else {
+			getNext().setPrevious(null);
+			return this;
+		}
 	}
 	public Node getPrevious()
 	{

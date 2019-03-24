@@ -1,61 +1,33 @@
 
-public class TLBEntry {
+public class TLBEntry extends VirtualEntry
+{
+	private String vPage;
 
-	private String VPage;
-	private int PageFrame;
-	private boolean V;
-	private boolean R;
-	private boolean D;
-	
-	public TLBEntry(String page) {
-		VPage = page;
-		V = true;
-		R = true;
-		D = false;
+	public TLBEntry(boolean valid, boolean reference, boolean dirty, int pageFrameNumber, String vPage)
+	{
+		super(valid, reference, dirty, pageFrameNumber);
+		setvPage(vPage);
 	}
-	
-	public void reset() {
-		setR(false);
+	public TLBEntry(String vPage, int pageFrameNumber)
+	{
+		super(pageFrameNumber);
+		setvPage(vPage);
 	}
-
-	public String getVPage() {
-		return VPage;
+	public TLBEntry(String vPage, String hexFrameNumber)
+	{
+		super(Integer.parseInt(hexFrameNumber.subSequence(0, 2).toString(), 16));
+		setvPage(vPage);
 	}
-
-	public void setVPage(String vPage) {
-		VPage = vPage;
+	public String getvPage()
+	{
+		return vPage;
 	}
-
-	public int getPageFrame() {
-		return PageFrame;
+	public void setvPage(String vPage)
+	{
+		this.vPage = vPage;
 	}
-
-	public void setPageFrame(int pageFrame) {
-		PageFrame = pageFrame;
+	public String toString()
+	{
+		return "TLB Entry: [V-Page: " + getvPage() + ", (Valid: " + isValid() + ", Reference: " + isReference() + ", Dirty: " + isDirty() + "), Page Frame: " + getPageFrame() + "]";
 	}
-
-	public boolean isValid() {
-		return V;
-	}
-
-	public void setV(boolean v) {
-		V = v;
-	}
-
-	public boolean isR() {
-		return R;
-	}
-
-	public void setR(boolean r) {
-		R = r;
-	}
-
-	public boolean isDirty() {
-		return D;
-	}
-
-	public void setD(boolean d) {
-		D = d;
-	}
-	
 }

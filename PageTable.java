@@ -1,53 +1,41 @@
 public class PageTable
 {
-	private PageTableEntry[][] pageTableEntries;
-	public PageTable(int rowLength, int columnLength)
+	private PageTableEntry[] pageTableEntries;
+	public PageTable(int length)
 	{
-		setPageTableEntries(new PageTableEntry[rowLength][columnLength]);
+		setPageTableEntries(new PageTableEntry[length]);
 	}
 	public PageTable()
 	{
-		setPageTableEntries(new PageTableEntry[256][4096]);
+		setPageTableEntries(new PageTableEntry[256]);
 	}
 	// functionality
-	public PageTableEntry getEntry(int row, int col)
+	public PageTableEntry getEntry(int index)
 	{
-		return getPageTableEntries()[row][col];
+		return getPageTableEntries()[index];
 	}
-	public boolean checkEntry(int row, int col)
+	public boolean checkEntry(int index)
 	{
-		return getPageTableEntries()[row][col].isValid();
+		return getPageTableEntries()[index].isValid();
 	}
-	public boolean checkIfEntryIsValid(int row, int col)
+	public boolean checkIfEntryIsValid(int index)
 	{
-		return (getPageTableEntries()[row][col].isValid() && !getPageTableEntries()[row][col].isDirty());
+		return (getPageTableEntries()[index].isValid() && !getPageTableEntries()[index].isDirty());
 	}
-	// Needs to be intrepretted with austin
-	
-	
-	
-	
-	/*    public void writeEntry(int pagenumber, String framenumber)
-   {
-       PT[pagenumber].writeEntry(framenumber);
-   }
-	 * 
-	 * 
-	 * 
-	 * public void writeEntry(int pageNumber, String frameNumberInHex)
+	public void writeEntry(int pageNumber, String frameNumberInHex)
 	{
-		getPageTableEntries[][].writeEntry()
+		getPageTableEntries()[pageNumber] = new PageTableEntry(frameNumberInHex);
 	}
-	public void writeEntry(int pageNumber, String frameNumber)
+	public void writeEntry(int pageNumber, int frameNumber)
 	{
-		
-	}*/
+		getPageTableEntries()[pageNumber] = new PageTableEntry(frameNumber);
+	}
 	// default getters/setters + toString
-	public PageTableEntry[][] getPageTableEntries()
+	public PageTableEntry[] getPageTableEntries()
 	{
 		return pageTableEntries;
 	}
-	public void setPageTableEntries(PageTableEntry[][] pageTableEntries)
+	public void setPageTableEntries(PageTableEntry[] pageTableEntries)
 	{
 		this.pageTableEntries = pageTableEntries;
 	}
@@ -55,14 +43,10 @@ public class PageTable
 	{
 		String returned = "";
 		returned += "Page Table Contents: \n";
-		// find a way to print this out correctly! Meaning the increments must be correct
-		/* for(int x = 0; x < pageTableEntries.length; x++)
+		 for(int x = 0; x < getPageTableEntries().length; x++)
 		{
-			for(int y = 0; y < pageTableEntries[x].length; y++)
-			{
-				returned += "(" + x + ", " + y + "):" + getPageTableEntries()[x][y] + "\n";
-			}
-		}*/
+			returned += "(" + x + "):" + getPageTableEntries()[x] + "\n";
+		}
 		return returned;
 	}
 }

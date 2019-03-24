@@ -8,11 +8,6 @@ public class Main
 	private static String currentTestFileName = "";
 	public static void main(String[] args)
 	{
-		// [pf#][page of addressable data]
-		// physicalMem = int[][4096]
-		
-		// pageTableEntries = PageTableEntry[]
-		// TLB = TLBEntry[];
 		if(args.length == 0)
 		{
 			System.out.println("Please give the program arguments which are text file names.  Example: testdata1.txt");
@@ -31,8 +26,8 @@ public class Main
 				fileOutputData.append("evicted_pg#");
 				fileOutputData.append("dirty_evicted_page");
 				fileOutputData.append('\n');
-				// time to put data		
-				
+				// time to run OS
+				CPU.initiate(args[i]);
 				// finally writes data out to .csv file
 				writeFile(fileOutputData);
 			}

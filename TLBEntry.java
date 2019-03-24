@@ -11,12 +11,12 @@ public class TLBEntry extends VirtualEntry
 	public TLBEntry(String vPage, int pageFrameNumber)
 	{
 		super(pageFrameNumber);
-		setvPage(vPage);
+		setvPage(vPage.substring(0, 2));
 	}
 	public TLBEntry(String vPage, String hexFrameNumber)
 	{
 		super(Integer.parseInt(hexFrameNumber.subSequence(0, 2).toString(), 16));
-		setvPage(vPage);
+		setvPage(vPage.substring(0, 2));
 	}
 	public String getvPage()
 	{
@@ -28,6 +28,6 @@ public class TLBEntry extends VirtualEntry
 	}
 	public String toString()
 	{
-		return "TLB Entry: [V-Page: " + getvPage() + ", (Valid: " + isValid() + ", Reference: " + isReference() + ", Dirty: " + isDirty() + "), Page Frame: " + getPageFrame() + "]";
+		return "TLB Entry: [V-Page: " + getvPage() + ", (V: " + isValid() + ", R: " + isReference() + ", D: " + isDirty() + "), Page Frame: " + getPageFrame() + "]";
 	}
 }

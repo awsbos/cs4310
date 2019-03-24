@@ -14,6 +14,6 @@ public class PageTableEntry extends VirtualEntry
 	}
 	public String toString()
 	{
-		return "Page Table Entry: (Valid: " + isValid() + ", Reference: " + isReference() + ", Dirty: " + isDirty() + ", Page Frame: " + getPageFrame();
+		return "Page Table Entry: (V: " + isValid() + ", R: " + isReference() + ", D: " + isDirty() + ", Page Frame: " + getPageFrame();
 	}
 }

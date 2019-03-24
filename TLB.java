@@ -9,6 +9,16 @@ public class TLB
 	{
 		settlbEntries(new TLBEntry[16]);
 	}
+	// functions
+	public void setEntry(int index, TLBEntry entry)
+	{
+		tlbEntries[index] = entry;
+	}
+	public TLBEntry getEntry(int index)
+	{
+		return gettlbEntries()[index];
+	}
+	// default getter/setter + toString
 	public TLBEntry[] gettlbEntries()
 	{
 		return tlbEntries;
@@ -23,7 +33,7 @@ public class TLB
 		returned += "TLB Contents: \n";
 		 for(int x = 0; x < gettlbEntries().length; x++)
 		{
-			returned += "(" + x + "):" + gettlbEntries()[x] + "\n";
+			returned += "(" + x + "): " + gettlbEntries()[x] + "\n";
 		}
 		return returned;
 	}

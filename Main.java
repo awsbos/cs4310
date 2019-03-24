@@ -21,12 +21,12 @@ public class Main
 				fileOutputData.append("r/w,");
 				fileOutputData.append("value,");
 				fileOutputData.append("soft,");
-				fileOutputData.append("hard");
-				fileOutputData.append("hit");
-				fileOutputData.append("evicted_pg#");
-				fileOutputData.append("dirty_evicted_page");
+				fileOutputData.append("hard,");
+				fileOutputData.append("hit,");
+				fileOutputData.append("evicted_pg#,");
+				fileOutputData.append("dirty_evicted_page,");
 				fileOutputData.append('\n');
-				// time to run OS
+				// time to run program
 				CPU.initiate(args[i]);
 				// finally writes data out to .csv file
 				writeFile(fileOutputData);

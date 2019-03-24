@@ -10,10 +10,6 @@ public class PageTable
 		setPageTableEntries(new PageTableEntry[256]);
 	}
 	// functionality
-	public PageTableEntry getEntry(int index)
-	{
-		return getPageTableEntries()[index];
-	}
 	public boolean checkEntry(int index)
 	{
 		return getPageTableEntries()[index].isValid();
@@ -22,11 +18,15 @@ public class PageTable
 	{
 		return (getPageTableEntries()[index].isValid() && !getPageTableEntries()[index].isDirty());
 	}
-	public void writeEntry(int pageNumber, String frameNumberInHex)
+	public PageTableEntry getEntry(int index)
+	{
+		return getPageTableEntries()[index];
+	}
+	public void setEntry(int pageNumber, String frameNumberInHex)
 	{
 		getPageTableEntries()[pageNumber] = new PageTableEntry(frameNumberInHex);
 	}
-	public void writeEntry(int pageNumber, int frameNumber)
+	public void setEntry(int pageNumber, int frameNumber)
 	{
 		getPageTableEntries()[pageNumber] = new PageTableEntry(frameNumber);
 	}
@@ -45,7 +45,7 @@ public class PageTable
 		returned += "Page Table Contents: \n";
 		 for(int x = 0; x < getPageTableEntries().length; x++)
 		{
-			returned += "(" + x + "):" + getPageTableEntries()[x] + "\n";
+			returned += "(" + x + "): " + getPageTableEntries()[x] + "\n";
 		}
 		return returned;
 	}

@@ -9,8 +9,6 @@ public class CPU
 	public static int[][] physicalMemory;
 	public static TLB tlb;
 	public static PageTable pageTable;
-	
-	
 	public static void initiate(String instructionFile)
 	{
 		// [pf#][page of addressable data]
@@ -24,25 +22,20 @@ public class CPU
 		try
 		{
 			br = new BufferedReader(new FileReader(file));
-			String st; 
+			String st;
 			while((st = br.readLine()) != null) 
 			{
 				int job = Integer.parseInt(st);
 				if(job == 0)
 				{
 					// read job
-					MMU.read();
+					MMU.read(br.readLine());
 				} else {
 					// write job
-					MMU.write();
+					MMU.write(br.readLine(), Integer.parseInt(br.readLine()));
 				}
 			}
-			/*while((st = br.readLine()) != null) 
-			{
-				System.out.println(st);
-				//contents[loc] = st;
-				loc++;
-			}*/
+			System.out.println(tlb);
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not read the file!");
 			e.printStackTrace();

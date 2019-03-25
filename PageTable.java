@@ -22,6 +22,10 @@ public class PageTable
 	{
 		return getPageTableEntries()[index];
 	}
+	public void setEntry(int index, PageTableEntry input)
+	{
+		getPageTableEntries()[index] = input;
+	}
 	public void setEntry(int pageNumber, String frameNumberInHex)
 	{
 		getPageTableEntries()[pageNumber] = new PageTableEntry(frameNumberInHex);

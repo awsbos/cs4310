@@ -8,10 +8,10 @@ public class PageReader
 {
 	// feed in the name of a page_file
 	// example 00.pg is actually "00"
-	public static void readPageFile(String address) throws IOException
+	public static void readPageFile(String address, int index)
 	{
-		String[] contents = new String[1024];
-		File file = new File("page_files", address + ".pg"); 
+		address = address.substring(0, 2);
+		File file = new File("page_files_copy", address + ".pg"); 
 		BufferedReader br;
 		try
 		{
@@ -20,7 +20,8 @@ public class PageReader
 			int loc = 0;
 			while((st = br.readLine()) != null) 
 			{
-				contents[loc] = st;
+				int currentInt = Integer.parseInt(st);
+				CPU.physicalMemory[index][loc] = currentInt;
 				loc++;
 			}
 		} catch (FileNotFoundException e) {
@@ -30,9 +31,9 @@ public class PageReader
 			System.out.println("Could not read in the file at " + file.toString());
 			e.printStackTrace();
 		}
-		//printOut(contents);
+		//printOut(CPU.physicalMemory[frameNumber]);
 	}
-	public static void printOut(String[] input)
+	public static void printOut(int[] input)
 	{
 		for(int i = 0; i < input.length; i++)
 		{

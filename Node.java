@@ -2,12 +2,14 @@ public class Node
 {
 	private Node previous;
 	private int current = 0;
+	private int pageFrameNumber;
 	private Node next;
-	public Node(Node previous, Node next, int current)
+	public Node(Node previous, Node next, int current, int pageFrameNumber)
 	{
 		setPrevious(previous);
 		setNext(next);
 		setCurrent(current);
+		setPageFrameNumber(pageFrameNumber);
 	}
 	public Node evict()
 	{
@@ -20,6 +22,10 @@ public class Node
 			getNext().setPrevious(null);
 			return this;
 		}
+	}
+	public int getFrame()
+	{
+		return getPageFrameNumber();
 	}
 	public Node getPrevious()
 	{
@@ -44,5 +50,13 @@ public class Node
 	public void setNext(Node next)
 	{
 		this.next = next;
+	}
+	public int getPageFrameNumber()
+	{
+		return pageFrameNumber;
+	}
+	public void setPageFrameNumber(int pageFrameNumber)
+	{
+		this.pageFrameNumber = pageFrameNumber;
 	}
 }

@@ -8,21 +8,18 @@ public class CPU
 {
 	public static int[][] physicalMemory;
 	public static TLB tlb;
-	public static PageTable pageTable;
 	public static void initiate(String instructionFile)
 	{
 		// [pf#][page of addressable data]
 		physicalMemory = new int[16][256];
 		tlb = new TLB(16);
-		pageTable = new PageTable(256);
-		
-		
 		File file = new File("test_files", instructionFile + ".txt"); 
 		BufferedReader br;
 		try
 		{
 			br = new BufferedReader(new FileReader(file));
 			String st;
+			int count = 1;
 			while((st = br.readLine()) != null) 
 			{
 				int job = Integer.parseInt(st);
@@ -34,8 +31,14 @@ public class CPU
 					// write job
 					MMU.write(br.readLine(), Integer.parseInt(br.readLine()));
 				}
+				Main.fileOutputData.append("\n");
+				if(count % 10 == 0)
+				{
+					OS.resetR();
+					MMU.resetR();
+				}
+				count++;
 			}
-			System.out.println(tlb);
 		} catch (FileNotFoundException e) {
 			System.out.println("Could not read the file!");
 			e.printStackTrace();
